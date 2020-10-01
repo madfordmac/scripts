@@ -1,0 +1,10 @@
+[Unit]
+Description=Notify on server reboot
+
+[Timer]
+OnBootSec=60s
+AccuracySec=60s
+
+[Install]
+WantedBy=timers.target
+

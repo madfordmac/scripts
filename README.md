@@ -10,3 +10,7 @@ that interface. Otherwise it will use an http remote IP request. Inserts the
 iptables rule before a likely pattern for your SSH allow filter. Customize
 $PATTERN at the top of the file for the rule you'd like to precede. May
 require installing the ipset tools for your distro.
+
+## reboot-checker (.service, .timer)
+Want to know when your system reboots? This set of systemd units will send root
+an email when the server reboots. Useful for remote systems.
