@@ -3,5 +3,5 @@ Description=Notify on server reboot
 
 [Service]
 Type=oneshot
-ExecStart=/usr/bin/sh -c "/usr/bin/uptime | /usr/bin/mailx -s 'Server Reboot Notification'"
+ExecStart=/bin/sh -c "/usr/bin/uptime | /usr/bin/mailx -s 'Server Reboot Notification'"
 
