@@ -1,6 +1,13 @@
 # scripts
 The contents of this repository are various unrelated scripts that others may find useful.
 
+## pwcheck.py
+Check passwords against the [Have I Been Pwned?](https://haveibeenpwned.com/)
+API. Import as a python module to use the `check_hash()` or `check_password`
+functions, or run on the command line with password passed by parameter,
+environment variable, or by prompt. Provides result via human-readable text
+and return code: 0 = a good password, 1 = password exists on at least one list.
+
 ## torban.sh
 Want to block people from using the tor network to attack your system from
 multiple IPs? This script uses the the API from tor to identify the endpoints
