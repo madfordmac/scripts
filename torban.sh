@@ -18,7 +18,7 @@ fi
 # Determine self IP
 if [[ -z $1 ]]; then
 	# We weren't passed an interface. Do http query.
-	myip=$(wget -q http://4.meyep.tech/ -O -)
+	myip=$(wget -q http://ipv4.ford-web.net/ -O -)
 else
 	# Get IP from the provided interface
 	myip=$(ip addr show $1 | awk '/inet / { split($2,s,"/"); print s[1] }')
