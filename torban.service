@@ -1,0 +1,9 @@
+[Unit]
+Description=Ban IPs from the tor network
+ConditionPathExists=/etc/torban.conf
+
+[Service]
+Type=oneshot
+Environment=IFACE=
+EnvironmentFile=-/etc/torban.conf
+ExecStart=/usr/local/sbin/torban.sh ${IFACE}
