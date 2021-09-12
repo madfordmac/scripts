@@ -25,8 +25,8 @@ else
 fi
 
 # Figure out which list to update
-oddnum=$(iptables -nL --line-numbers | awk '/torodd/ { print $1 }')
-evennum=$(iptables -nL --line-numbers | awk '/toreven/ { print $1 }')
+oddnum=$(iptables -nL INPUT --line-numbers | awk '/torodd/ { print $1 }')
+evennum=$(iptables -nL INPUT --line-numbers | awk '/toreven/ { print $1 }')
 if [[ ! -z $oddnum ]]; then
 	# The odd list is active, update even.
 	target_set=toreven
@@ -42,7 +42,7 @@ else
 	ipset create torodd hash:ip hashsize 2048
 	ipset create toreven hash:ip hashsize 2048
 	target_set=torodd
-	target_line=$(iptables -nL --line-numbers | awk "/$PATTERN/ { print \$1 }")
+	target_line=$(iptables -nL INPUT --line-numbers | awk "/$PATTERN/ { print \$1 }")
 	iptables -I INPUT $target_line -m set --match-set toreven src -j DROP
 fi
 
