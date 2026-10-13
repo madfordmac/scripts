@@ -8,6 +8,15 @@ functions, or run on the command line with password passed by parameter,
 environment variable, or by prompt. Provides result via human-readable text
 and return code: 0 = a good password, 1 = password exists on at least one list.
 
+## ldap_auth.py
+Authenticate Home Assistant command-line users against LDAP by binding directly
+as each user. Install `ldap3` with `python3 -m pip install -r requirements.txt`,
+then configure [ldap_auth.conf.example](ldap_auth.conf.example). Set the provider
+command to `/absolute/path/to/ldap_auth.py --config /path/to/ldap_auth.conf` and
+enable `meta: true`. The script emits Home Assistant `name`, `group`, and
+`local_only` metadata for users in the configured admin or user group. Group
+membership checks expect the group entries to expose a `member` attribute.
+
 ## reboot-checker (.service, .timer)
 Want to know when your system reboots? This set of systemd units will send root
 an email when the server reboots. Useful for remote systems.

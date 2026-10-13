@@ -1,0 +1,28 @@
+# LDAP authentication for Home Assistant's command_line provider.
+# Install ldap3 with: python3 -m pip install -r requirements.txt
+# The script binds as the supplied user; there is no service/bind account.
+# Group membership is checked by reading each group entry's "member" attribute.
+
+[ldap]
+# LDAP URI. Use ldap:// with starttls=yes, or ldaps:// with starttls=no.
+server_uri = ldap://ldap.example.org:389
+starttls = yes
+
+# PEM CA certificate file used to validate the LDAP server certificate.
+# Leave blank to use the system CA store.
+ca_certificate = /etc/ssl/certs/example-ldap-ca.pem
+
+# Group entries that grant Home Assistant administrator or regular-user access.
+admin_group_dn = cn=home-assistant-admins,ou=groups,dc=example,dc=org
+user_group_dn = cn=home-assistant-users,ou=groups,dc=example,dc=org
+
+# {username} is substituted with the LDAP-escaped username.
+user_dn_template = uid={username},ou=people,dc=example,dc=org
+
+# true/yes always restricts this account to the local network.
+# false/no allows login from anywhere.
+# A group DN allows remote login only for members of that group; others are local-only.
+local_only = false
+
+# Example using a remote-access group instead:
+# local_only = cn=home-assistant-remote,ou=groups,dc=example,dc=org
