@@ -103,10 +103,22 @@ def authenticate(settings, username, password):
 		if not connection.bind():
 			return None
 
+		connection.search(
+			search_base=user_dn,
+			search_filter="(objectClass=*)",
+			search_scope=BASE,
+			attributes=["cn"],
+		)
+		if not connection.entries:
+			return None
+		common_name = connection.entries[0].cn.value
+		if not common_name:
+			return None
+
 		def is_member(group_dn):
 			connection.search(
 				search_base=group_dn,
-				search_filter="(member=%s)" % escape_filter_chars(user_dn),
+				search_filter="(memberUid=%s)" % escape_filter_chars(username),
 				search_scope=BASE,
 				attributes=[],
 			)
@@ -123,7 +135,7 @@ def authenticate(settings, username, password):
 			local_only = not is_member(settings["remote_group_dn"])
 		else:
 			local_only = settings["local_only"]
-		return {"name": username, "group": group, "local_only": local_only}
+		return {"name": common_name, "group": group, "local_only": local_only}
 	finally:
 		connection.unbind()
 

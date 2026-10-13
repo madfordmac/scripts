@@ -1,7 +1,7 @@
 # LDAP authentication for Home Assistant's command_line provider.
 # Install ldap3 with: python3 -m pip install -r requirements.txt
 # The script binds as the supplied user; there is no service/bind account.
-# Group membership is checked by reading each group entry's "member" attribute.
+# Group membership is checked against each group's "memberUid" usernames.
 
 [ldap]
 # LDAP URI. Use ldap:// with starttls=yes, or ldaps:// with starttls=no.

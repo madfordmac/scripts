@@ -14,8 +14,9 @@ as each user. Install `ldap3` with `python3 -m pip install -r requirements.txt`,
 then configure [ldap_auth.conf.example](ldap_auth.conf.example). Set the provider
 command to `/absolute/path/to/ldap_auth.py --config /path/to/ldap_auth.conf` and
 enable `meta: true`. The script emits Home Assistant `name`, `group`, and
-`local_only` metadata for users in the configured admin or user group. Group
-membership checks expect the group entries to expose a `member` attribute.
+`local_only` metadata for users in the configured admin or user group. The
+script reads the user's `cn` for the displayed name and checks group
+`memberUid` values against the login username.
 
 ## reboot-checker (.service, .timer)
 Want to know when your system reboots? This set of systemd units will send root
